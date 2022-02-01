@@ -10,13 +10,16 @@ class StreamsScreen extends StatelessWidget {
   //step1: create streamController//
   final StreamController streamController = StreamController();
 
-  void streamData() async {//step2: stream async function//
-    streamController.stream.listen((data) {//step3: call stream listener//
+  void streamData() async {
+    //step2: stream async function//
+    streamController.stream.listen((data) {
+      //step3: call stream listener//
       print(data);
     });
 
-    for (var i = 0; i < 5; i++) {//fake stream data//
-      streamController.add('You got a Message !');//add stream data/
+    for (var i = 0; i < 5; i++) {
+      //fake stream data//
+      streamController.add('You got a Message !'); //add stream data/
       await Future.delayed(const Duration(seconds: 5), () {
         print('Got it');
       });
@@ -26,6 +29,12 @@ class StreamsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const Text('Add'),
+        onPressed: () {
+          streamController.add('Got New Notification');
+        },
+      ),
       appBar: AppBar(
         title: Text(title),
         centerTitle: true,
